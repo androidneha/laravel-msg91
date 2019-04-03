@@ -1,0 +1,39 @@
+{
+  "authors": [
+    {
+      "name": "Neha Sharma",
+      "email": "name@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Laravel\\Msg91\\": "src/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "description": "Laravel integration for Msg91 messaging API.",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Laravel\\Msg91\\ServiceProvider"
+      ],
+      "aliases": {
+        "Msg91": "Laravel\\Msg91\\Facade"
+      }
+    }
+  },
+  "keywords": ["laravel", "msg91", "integration", "sms", "otp"],
+  "license": "MIT",
+  "name": "androidneha/laravel-msg91",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.0"
+  },
+  "require-dev": {
+    "laravel/framework": "^5.0"
+  }
+}
