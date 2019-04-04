@@ -66,7 +66,7 @@ $ php artisan vendor:publish
 
 ### License
 
-See [LICENSE.md][license-url] file.
+See [LICENSE][license-url] file.
 
 
 [license-url]: LICENSE
