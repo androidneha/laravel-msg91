@@ -81,10 +81,8 @@ class Client
             ],
         ]);
         if ($response->getStatusCode() === 200) {
-            $body = trim((string) $response->getBody());
-            if (strlen($body) === 24) {
-                return $body;
-            }
+            $body = json_decode((string) $response->getBody(), true);
+            return isset($body['type']) && ($body['type'] === 'success') ? $body['message'] : false;
         }
         return false;
     }
