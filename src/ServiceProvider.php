@@ -25,6 +25,11 @@ class ServiceProvider extends LaravelServiceProvider
             return new Client(config('msg91.auth_key'));
         });
         $this->app->alias(Client::class, 'msg91');
+        Notification::resolved(function (ChannelManager $service) {
+            $service->extend('msg91', function () {
+                return new Channels\Msg91Channel(app(Client::class));
+            });
+        });
     }
 
     /**
@@ -34,11 +39,6 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-        Notification::resolved(function (ChannelManager $service) {
-            $service->extend('msg91', function () {
-                return new Channels\Msg91Channel(app(Client::class));
-            });
-        });
         Validator::extend('msg91_otp', function ($attribute, $value, $parameters, $validator) {
             $client = app(Client::class);
             $values = $validator->getData();
