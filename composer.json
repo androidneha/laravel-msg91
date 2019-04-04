@@ -2,7 +2,7 @@
   "authors": [
     {
       "name": "Neha Sharma",
-      "email": "name@example.com"
+      "email": "neha8q@gmail.com"
     }
   ],
   "autoload": {
@@ -31,7 +31,7 @@
   "require": {
     "php": ">=7.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^6.0"
+    "guzzlehttp/guzzle": "^5.0||^6.0"
   },
   "require-dev": {
     "laravel/framework": "^5.0"
