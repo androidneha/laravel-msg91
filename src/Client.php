@@ -42,8 +42,9 @@ class Client
      */
     public function otp($number, $sender = null, $message = null)
     {
+        $guzzle6 = version_compare(Guzzle::VERSION, '6.0.0') >= 0;
         $response = $this->http->post(self::ENDPOINT_OTP, [
-            'form_params' => [
+            $guzzle6 ? 'form_params' : 'body' => [
                 'authkey' => $this->key,
                 'message' => $message,
                 'mobile' => $number,
@@ -68,14 +69,16 @@ class Client
     public function sms($number, $message, $sender = null, $route = null, $country = null)
     {
         $response = $this->http->post(self::ENDPOINT_SMS, [
-            'form_params' => [
-                'authkey' => $this->key,
+            'headers' => ['authkey' => $this->key],
+            'json' => [
                 'country' => $country ?? config('msg91.default_country'),
-                'message' => $message,
-                'mobiles' => implode(',', (array) $number),
                 'route' => $route ?? config('msg91.default_route'),
                 'sender' => $sender ?? config('msg91.default_sender'),
-            ]
+                'sms' => [[
+                    'message' => $message,
+                    'to' => (array) $number,
+                ]],
+            ],
         ]);
         if ($response->getStatusCode() === 200) {
             $body = trim((string) $response->getBody());
@@ -93,8 +96,9 @@ class Client
      */
     public function verify($number, $otp)
     {
+        $guzzle6 = version_compare(Guzzle::VERSION, '6.0.0') >= 0;
         $response = $this->http->post(self::ENDPOINT_OTP_VERIFY, [
-            'form_params' => [
+            $guzzle6 ? 'form_params' : 'body' => [
                 'authkey' => $this->key,
                 'mobile' => $number,
                 'otp' => $otp,
