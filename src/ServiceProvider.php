@@ -42,7 +42,7 @@ class ServiceProvider extends LaravelServiceProvider
         Validator::extend('msg91_otp', function ($attribute, $value, $parameters, $validator) {
             $client = app(Client::class);
             $values = $validator->getData();
-            $number = array_get($values, $parameters[0]);
+            $number = array_get($values, empty($parameters[0]) ? 'number' : $parameters[0]);
             return $client->verify($number, $value);
         });
     }
