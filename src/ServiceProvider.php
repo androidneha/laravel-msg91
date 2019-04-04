@@ -24,7 +24,7 @@ class ServiceProvider extends LaravelServiceProvider
         $this->app->bind(Client::class, function () {
             return new Client(config('msg91.auth_key'));
         });
-        $this->app->alias('msg91', Client::class);
+        $this->app->alias(Client::class, 'msg91');
     }
 
     /**
