@@ -128,7 +128,7 @@ use Illuminate\Support\Facades\Validator
 $data = ['number' => '9876543210', 'otp' => '1234'];
 
 $validator = Validator::make($data, [
-    'number => ['required', 'digits:10'],
+    'number' => ['required', 'digits:10'],
     'otp' => ['required', 'digits:4', 'msg91_otp'], // default key for source number is 'number', you can customize this using 'msg91_otp:key_name'
 ]);
 
