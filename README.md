@@ -82,8 +82,6 @@ Define the `toMsg91` method:
 
 use Laravel\Msg91\Message\Msg91Message;
 
-...
-
 public function toMsg91()
 {
     return (new Msg91Message)
@@ -96,6 +94,7 @@ public function toMsg91()
 Default `routeNotificationForMsg91` method in your notifiable class:
 ```php
 <?php
+
 public function routeNotificationForMsg91($notification)
 {
     return $this->phone_number;
