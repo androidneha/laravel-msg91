@@ -25,10 +25,8 @@ class ServiceProvider extends LaravelServiceProvider
             return new Client(config('msg91.auth_key'));
         });
         $this->app->alias(Client::class, 'msg91');
-        Notification::resolved(function (ChannelManager $service) {
-            $service->extend('msg91', function () {
-                return new Channels\Msg91Channel(app(Client::class));
-            });
+        Notification::extend('msg91', function () {
+            return new Channels\Msg91Channel(app(Client::class));
         });
     }
 
