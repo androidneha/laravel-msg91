@@ -59,8 +59,8 @@ class Client
     }
 
     /**
-     * @param string|array $number
-     * @param string $message
+     * @param string|array|null $number
+     * @param string|array $message
      * @param string $sender
      * @param int|null $route
      * @param string|null $country
@@ -68,16 +68,19 @@ class Client
      */
     public function sms($number, $message, $sender = null, $route = null, $country = null)
     {
+        if (is_string($message)) {
+            $message = [[
+                'message' => $message,
+                'to' => (array) $number,
+            ]];
+        }
         $response = $this->http->post(self::ENDPOINT_SMS, [
             'headers' => ['authkey' => $this->key],
             'json' => [
                 'country' => $country ?? config('msg91.default_country'),
                 'route' => $route ?? config('msg91.default_route'),
                 'sender' => $sender ?? config('msg91.default_sender'),
-                'sms' => [[
-                    'message' => $message,
-                    'to' => (array) $number,
-                ]],
+                'sms' => $message,
             ],
         ]);
         if ($response->getStatusCode() === 200) {
