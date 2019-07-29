@@ -38,9 +38,14 @@ $ php artisan vendor:publish
 ```php
 <?php
 
-$result = Msg91::sms('919999999999', 'Hello There!');
+$result = Msg91::sms('919999999999', 'Hello there!');
  
-$result = Msg91::sms('919999999999', 'Hello There!', 'TEST12');
+$result = Msg91::sms('919999999999', 'Hello there!', 'TEST12');
+ 
+$result = Msg91::sms(null, [
+    ['to' => ['919999999999', '918888888888'], 'message' => 'Hello there!'],
+    ['to' => ['917777777777'], 'message' => 'Come here!'],
+], 'TEST12');
 ```
 
 - Send OTP to a number.
