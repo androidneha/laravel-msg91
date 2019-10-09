@@ -3,6 +3,7 @@
 namespace Laravel\Msg91;
 
 use Illuminate\Notifications\ChannelManager;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
@@ -40,7 +41,7 @@ class ServiceProvider extends LaravelServiceProvider
         Validator::extend('msg91_otp', function ($attribute, $value, $parameters, $validator) {
             $client = app(Client::class);
             $values = $validator->getData();
-            $number = array_get($values, empty($parameters[0]) ? 'number' : $parameters[0]);
+            $number = Arr::get($values, empty($parameters[0]) ? 'number' : $parameters[0]);
             return $client->verify($number, $value);
         });
     }
