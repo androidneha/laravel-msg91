@@ -31,9 +31,9 @@
   "require": {
     "php": ">=7.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^5.0||^6.0"
+    "guzzlehttp/guzzle": "^5.0||^6.0||^7.0"
   },
   "require-dev": {
-    "laravel/framework": "^5.0"
+    "laravel/framework": "^5.0||^6.0||^7.0||^8.0"
   }
 }
